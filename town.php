@@ -1,6 +1,6 @@
 <?php
 $ps = 32;
-$nb_maisons = 5;
+$nb_maisons = 10;
 for ($i = 0; $i<$nb_maisons; $i++) {
 	$w = mt_rand(3,10);
 	$h = mt_rand(2,5);

@@ -61,7 +61,10 @@ Q.Sprite.extend("NPC",{
 	step: function(dt) {
 		if (this.p.vx != 0) {
 			this.p.x+=this.p.vx*dt;
-			if (Math.abs(this.p.x) > width_div_2) this.p.vx = this.p.vx * -1;
+			if (Math.abs(this.p.x) > width_div_2) {
+				this.p.vx = this.p.vx * -1;
+				this.p.x += ((Math.abs(this.p.x) != this.p.x) ? 1 :-1);
+			}
 			if (this.pause) {
 				this.p.vx += (this.p.vx < 0 ? 50*dt : -50*dt);
 				if (Math.abs(this.p.vx) < 3) {

@@ -58,7 +58,7 @@ var game_actions = [
 			{v: 'Je cherche des armes.'},
 			{v: 'Je veux juste discuter.',  c: function() {
 				return {
-					v: polemiques[Math.floor(Math.random() * polemiques.length)], 
+					v: polemiques[Math.floor(Math.random() * polemiques.length)],
 					c: function() {
 						return [
 							{v: 'Fascinant !', c: function() {return {v: 'Oui, je trouve aussi'}} },
@@ -66,6 +66,7 @@ var game_actions = [
 							{v: 'Intéressant...', c: function() {return {v: 'Merci'}} },
 							{v: 'Euh...', c: function() {return {v: 'C\'est pourtant clair, non ?'}}  },
 							{v: 'J\'ai rien compris !', c: function() {return {v: 'C\'est pourtant clair, non ?'}}  },
+							{v: 'Va te faire foutre !', c: function() {return 'HITPLAYER'}  }
 						];
 					}
 				}

@@ -265,6 +265,7 @@ window.addEventListener("load",function() {
 			}
 			Q.input.on('fire',stage,function(e) {
 				try {
+					stage.options.player.pause = false;
 					var tmp_new_actions = (is_action_list ? stage.options.actions[csti].c() : stage.options.actions.c());
 					if (tmp_new_actions == 'HIT' || tmp_new_actions == 'HITPLAYER') {
 						BIM(
@@ -300,7 +301,7 @@ window.addEventListener("load",function() {
 				} catch (e) {
 					Q.stage(0).unpause();
 					// Pour éviter qu'on refasse un truc juste après avoir parlé
-					Q("Player", 0).first().last_action = Date.now();
+					stage.options.player.last_action = Date.now();
 					Q.clearStage(1);
 				}
 			});
