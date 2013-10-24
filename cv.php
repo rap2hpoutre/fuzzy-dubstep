@@ -51,18 +51,31 @@ window.addEventListener("load",function() {
 		}
 	});
 
+	Q.Sprite.extend("Ptf",{
+		init: function(p) {
+			this._super(p, {asset:'plateforme1.png' });
+		},
+		setPoints: function() {
+			this.p.points = [
+				[this.p.cx*-1, 0],
+				[this.p.cx,0],
+				[this.p.cx, this.p.cy],
+				[this.p.cx*-1, this.p.cy]
+			];
+		}
+	});
+
 	Q.scene("Main",function(stage) {
 		// stage.insert(new Q.Repeater({ asset: "background.png", speedX: 0, speedY: 0 }));
-		ptf = stage.insert(new Q.Sprite({asset:'plateforme1.png', x: 50, y: 180}));
-		ptf.p.points = [
-			[ptf.p.cx*-1, 0],
-			[ptf.p.cx,0],
-			[ptf.p.cx, ptf.p.cy],
-			[ptf.p.cx*-1, ptf.p.cy]
-		];
+		stage.insert(new Q.Ptf({x: 50, y: 180})).setPoints();
+		stage.insert(new Q.Ptf({x: 180, y: 180})).setPoints();
+		stage.insert(new Q.Ptf({x: 320, y: 150})).setPoints();
 		var player = stage.insert(new Q.Player({x: 20, y: 100}));
-		stage.insert(new Q.Sprite({asset:'arrows.png', x: 260, y: 170}));
 		stage.add("viewport").follow(player,{x: true, y: false}, {minX: -20});
+	});
+
+	Q.scene("UI",function(stage) {
+		stage.insert(new Q.Sprite({asset:'arrows.png', x: 260, y: 170}));
 	});
 
 
@@ -78,7 +91,8 @@ window.addEventListener("load",function() {
 			walkright: { frames: [8,9,8,11,10,12,10,11], rate: 1/6},
 			walkleft: { frames: [17,16,17,14,15,13,15,14], rate: 1/6},
 		});
-		Q.stageScene("Main");
+		Q.stageScene("Main",0);
+		Q.stageScene("UI",1);
 	}, {
 		progressCallback: function(loaded,total) {}
 	});
