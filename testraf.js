@@ -3,12 +3,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Allyson Jaroszewski",
-						bg_text_color: "rgba(117,38,217,0.95)",
+						nname: "Asbed Girardin",
+						bg_text_color: "rgba(106,121,126,0.95)",
 						text_color: "black",
 						sprite: "pnj1",
 						sheet: "pnj1",
-						vx: 20
+						vx: 0
 					})
 				)
 			);
@@ -24,12 +24,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Dorianna Fukuda",
-						bg_text_color: "rgba(43,89,166,0.95)",
+						nname: "Lilliane Gakusha",
+						bg_text_color: "rgba(116,172,132,0.95)",
 						text_color: "black",
 						sprite: "pnj2",
 						sheet: "pnj2",
-						vx: -10
+						vx: 0
 					})
 				)
 			);
@@ -45,12 +45,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Faith Ishiyama",
-						bg_text_color: "rgba(218,180,204,0.95)",
+						nname: "Audélia Moore",
+						bg_text_color: "rgba(90,136,4,0.95)",
 						text_color: "black",
 						sprite: "pnj3",
 						sheet: "pnj3",
-						vx: 50
+						vx: -60
 					})
 				)
 			);
@@ -66,12 +66,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Swan Newecome",
-						bg_text_color: "rgba(211,29,243,0.95)",
+						nname: "Rohan Ricardo",
+						bg_text_color: "rgba(76,34,136,0.95)",
 						text_color: "black",
 						sprite: "pnj4",
 						sheet: "pnj4",
-						vx: -10
+						vx: 0
 					})
 				)
 			);
@@ -87,12 +87,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Flavien Moldavski",
-						bg_text_color: "rgba(188,124,2,0.95)",
+						nname: "Cerise Lipszyc",
+						bg_text_color: "rgba(197,72,17,0.95)",
 						text_color: "black",
 						sprite: "pnj5",
 						sheet: "pnj5",
-						vx: 30
+						vx: 0
 					})
 				)
 			);
@@ -108,12 +108,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Erik Boisson",
-						bg_text_color: "rgba(80,158,52,0.95)",
+						nname: "Mami Blaszczak",
+						bg_text_color: "rgba(101,199,238,0.95)",
 						text_color: "black",
 						sprite: "pnj6",
 						sheet: "pnj6",
-						vx: 10
+						vx: 0
 					})
 				)
 			);
@@ -129,12 +129,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Carmel Ukiyo",
-						bg_text_color: "rgba(231,169,11,0.95)",
+						nname: "Billel Namiki",
+						bg_text_color: "rgba(72,47,124,0.95)",
 						text_color: "black",
 						sprite: "pnj7",
 						sheet: "pnj7",
-						vx: 30
+						vx: 0
 					})
 				)
 			);
@@ -150,8 +150,8 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Santiago Holland",
-						bg_text_color: "rgba(4,200,166,0.95)",
+						nname: "Chakib Antonovitch",
+						bg_text_color: "rgba(126,176,78,0.95)",
 						text_color: "black",
 						sprite: "pnj8",
 						sheet: "pnj8",
@@ -171,8 +171,8 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Méimoun Robles",
-						bg_text_color: "rgba(247,67,177,0.95)",
+						nname: "Adenora Koutovski",
+						bg_text_color: "rgba(21,174,124,0.95)",
 						text_color: "black",
 						sprite: "pnj9",
 						sheet: "pnj9",
@@ -192,12 +192,12 @@ var pnjs = [];pnjs.push(
 					new Q.NPC({
 						x: Math.round((houses.p.cx - Math.floor(Math.random()*houses.p.w))/16)*16,
 						y: Math.floor(Math.random()*60)+360,
-						nname: "Tareen Hanari",
-						bg_text_color: "rgba(51,50,178,0.95)",
+						nname: "Arzula Mogaburu",
+						bg_text_color: "rgba(26,86,67,0.95)",
 						text_color: "black",
 						sprite: "pnj10",
 						sheet: "pnj10",
-						vx: 0
+						vx: -70
 					})
 				)
 			);
