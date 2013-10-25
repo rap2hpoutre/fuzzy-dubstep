@@ -12,9 +12,9 @@ window.addEventListener("load",function() {
 	var Q = window.Q = Quintus({development: true}).include("Sprites, Scenes, Input, 2D, Anim, Touch, UI").setup("myGame");
 
 
-	// Q.input.joypadControls();
+	Q.input.joypadControls();
 	Q.input.keyboardControls();
-	// Q.input.touchControls({ controls:  [ [],[],[],[],[] ] });
+	Q.input.touchControls({ controls:  [ [],[],[],[],[] ] });
 
 
 
