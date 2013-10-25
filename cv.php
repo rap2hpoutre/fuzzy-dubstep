@@ -99,14 +99,29 @@ window.addEventListener("load",function() {
 });
 </script>
 <style>
-  body { padding:0px; margin:0px; }
+	body { padding:0px; margin:0px; font: 11px Arial,Helvetica, sans-serif; margin: 0;}
+	h1,h2,h3 {font-weight: bold; margin: 0;}
+	h1 { font-size: 15px; padding: 5px 0 5px 0; }
+	h2 { font-size: 14px; padding: 4px 0 4px 0; }
+	h3 { font-size: 13px; padding: 2px 0 2px 0; }
+	ul { color: #777; list-style-type: none; padding: 0; text-align: justify;}
+	ul li { color: #000; margin: 10px 0 0 16px}
 </style>
 </head>
 <body>
-<div style="width:320px; margin:0 auto;">
-<h1>RH: Dev</h1>
-<canvas id="myGame" width="320" height="200" style="border: black 1px solid"></canvas>
-<p>Paarcours</p>
+<div style="width:340px; margin:0 auto;">
+	<h1>Raphaël Huchet: Développeur</h1>
+	<canvas id="myGame" width="320" height="200" style="border: black 1px solid"></canvas>
+	<h2>Parcours professionnel</h2>
+	<h3>Depuis Avril 2007</h3>
+	<p>
+		Responsable du logiciel « Edoceo Learning Manager », plateforme LMS de la société e-doceo :
+		<ul>
+			<li>Développement seul et en équipe<br />(pilotage, conception, programmation, tests, livraison)</li>
+			<li>E-learning: développement du LMS, standards SCORM et AICC, installation, configuration, monitoring sur serveurs hétérogènes</li>
+			<li>Gestion de projet, expression des besoins, workflow, déplacements, formation de développeurs, process qualité, tests unitaires et fonctionnels automatisés</li>
+		</ul>
+	</p>
 </div>
 </body>
 </html>
