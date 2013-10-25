@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 <title>CV</title>
 <script src="http://cdn.html5quintus.com/v0.1.6/quintus-all.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 window.addEventListener("load",function() {
 	var Q = window.Q = Quintus({development: true}).include("Sprites, Scenes, Input, 2D, Anim, Touch, UI").setup("myGame");
@@ -22,16 +23,14 @@ window.addEventListener("load",function() {
 			this._super(p, {sprite: "player", sheet: "player", x: 410, y: 90, speed: 150 });
 			this.add('2d, animation, platformerControls');
 			this.play('stand');
+			this.currentDivId = 'intro';
+			this.updateDiv(this.currentDivId);
 
-
-			/*
 			this.on("hit.sprite",function(collision) {
-				if(collision.obj.isA("Tower")) {
-					Q.stageScene("endGame",1, { label: "You Won!" });
-					this.destroy();
+				if(collision.obj.isA("Ptf") && this.currentDivId != collision.obj.p.divId) {
+					this.updateDiv(collision.obj.p.divId);
 				}
 			});
-			*/
 		},
 		step: function(dt) {
 			if (this.p.y > 300) {
@@ -48,6 +47,10 @@ window.addEventListener("load",function() {
 				// this.p.x = Math.floor(this.p.x);
 				// this.p.y = Math.floor(this.p.y);
 			}
+		},
+		updateDiv: function(divId) {
+			this.currentDivId = divId;
+			$('#content').html($('#' + this.currentDivId).html());
 		}
 	});
 
@@ -67,18 +70,18 @@ window.addEventListener("load",function() {
 
 	Q.scene("Main",function(stage) {
 		// stage.insert(new Q.Repeater({ asset: "background.png", speedX: 0, speedY: 0 }));
-		stage.insert(new Q.Ptf({x: 50, y: 180})).setPoints();
-		stage.insert(new Q.Ptf({x: 180, y: 180})).setPoints();
-		stage.insert(new Q.Ptf({x: 320, y: 150})).setPoints();
+		stage.insert(new Q.Ptf({x: 50, y: 180, divId: 'intro'})).setPoints();
+		stage.insert(new Q.Ptf({x: 180, y: 180, divId: 'competences'})).setPoints();
+		stage.insert(new Q.Ptf({x: 320, y: 150, divId: 'parcours'})).setPoints();
+		stage.insert(new Q.Ptf({x: 470, y: 130, divId: 'formation'})).setPoints();
+		stage.insert(new Q.Ptf({x: 660, y: 180, divId: 'activites'})).setPoints();
 		var player = stage.insert(new Q.Player({x: 20, y: 100}));
 		stage.add("viewport").follow(player,{x: true, y: false}, {minX: -20});
 	});
 
 	Q.scene("UI",function(stage) {
-		stage.insert(new Q.Sprite({asset:'arrows.png', x: 260, y: 170}));
+		stage.insert(new Q.Sprite({asset:'arrows.png', x: 280, y: 170}));
 	});
-
-
 
 	// Chargement initial
 	Q.load("player.png, background.png, plateforme1.png, arrows.png", function() {
@@ -100,28 +103,84 @@ window.addEventListener("load",function() {
 </script>
 <style>
 	body { padding:0px; margin:0px; font: 11px Arial,Helvetica, sans-serif; margin: 0;}
-	h1,h2,h3 {font-weight: bold; margin: 0;}
+	h1,h2,h3 {font-weight: bold; margin: 0; color: #556;}
 	h1 { font-size: 15px; padding: 5px 0 5px 0; }
 	h2 { font-size: 14px; padding: 4px 0 4px 0; }
 	h3 { font-size: 13px; padding: 2px 0 2px 0; }
-	ul { color: #777; list-style-type: none; padding: 0; text-align: justify;}
-	ul li { color: #000; margin: 10px 0 0 16px}
+	ul { color: #777; list-style-type: circle; padding: 0; text-align: justify;}
+	ul li { color: #000; margin: 6px 0 4px 16px}
 </style>
 </head>
 <body>
-<div style="width:340px; margin:0 auto;">
-	<h1>Raphaël Huchet: Développeur</h1>
-	<canvas id="myGame" width="320" height="200" style="border: black 1px solid"></canvas>
-	<h2>Parcours professionnel</h2>
-	<h3>Depuis Avril 2007</h3>
-	<p>
-		Responsable du logiciel « Edoceo Learning Manager », plateforme LMS de la société e-doceo :
-		<ul>
-			<li>Développement seul et en équipe<br />(pilotage, conception, programmation, tests, livraison)</li>
-			<li>E-learning: développement du LMS, standards SCORM et AICC, installation, configuration, monitoring sur serveurs hétérogènes</li>
-			<li>Gestion de projet, expression des besoins, workflow, déplacements, formation de développeurs, process qualité, tests unitaires et fonctionnels automatisés</li>
-		</ul>
-	</p>
-</div>
+	<div style="width:340px; margin:0 auto;">
+		<h1>Raphaël Huchet: Développeur</h1>
+		<canvas id="myGame" width="320" height="200" style="border: black 1px solid"></canvas>
+		<div id="content"></div>
+	</div>
+
+	<div id="intro" style="display: none;">
+		<h2>Qui suis-je ?</h2>
+		<p>
+			<ul>
+			<li>J'ai 28 ans, on peut m'appeler au 06 26 54 79 71 et m'écrire à cette adresse: raphaelht@gmail.com</li>
+			<li>Pour me voir il faut passer aller 24 boulevard Stalingrad à Nantes, sinon j'ai le permis et une carte de bus.</li>
+			<li>Pour découvrir ce qui (je l'espère) pourra vous intéresser (parcours professionnel, compétences, etc.) je vous invite à vous rendre sur la plateforme suivante, avec le pouce ou les touches du clavier</li>
+			</ul>
+		</p>
+	</div>
+
+	<div id="parcours" style="display: none;">
+		<h2>Parcours professionnel</h2>
+		<h3>Depuis Avril 2007</h3>
+		<p>
+			Responsable du logiciel « Edoceo Learning Manager », plateforme LMS de la société e-doceo :
+			<ul>
+				<li>Développement seul et en équipe<br />(pilotage, conception, programmation, tests, livraison)</li>
+				<li>E-learning: développement du LMS, standards SCORM et AICC, installation, configuration, monitoring</li>
+				<li>Gestion de projet, expression des besoins, workflow, déplacements, formation de développeurs, process qualité, tests unitaires et fonctionnels automatisés</li>
+			</ul>
+		</p>
+		<h3>Janvier à Mars 2007</h3>
+		<p>Stage en développement pour le Groupe PLG</p>
+	</div>
+
+	<div id="formation" style="display: none;">
+		<h2>Formation</h2>
+		<p>
+			<ul>
+				<li>2006-2007: Formation Analyste-programmeur au CNAM de Nantes</li>
+				<li>2005: Université de Sociologie à Nantes</li>
+				<li>2004: Université de Philosophie à Nantes</li>
+				<li>2003: Baccalauréat L (option italien)</li>
+			</ul>
+		</p>
+	</div>
+
+	<div id="competences" style="display: none;">
+		<h2>Compétences</h2>
+		<h3>Développement</h3>
+		<p>
+			<ul>
+				<li>Expert développement Web : PHP5, MySQL5, HTML5, Javascript (objet, design patterns, sécurité, optimisation) Xp: 7ans</li>
+				<li>Connaissances en C#, Ruby, NodeJS, LUA</li>
+			</ul>
+		</p>
+		<h3>Outils/divers</h3>
+		<p>
+			<ul>
+				<li>Utilisation quotidienne: LAMP, SVN, Selenium (tests fonctionnels), PHPUnit (tests unitaires), Phing, PuTTY (SSH), Notepad++, BugTracker, Bash (find, grep, cron, etc.)</li>
+				<li>Méthodes d’analyse: UML (+merise)</li>
+				<!-- <li>Adaptation à divers IDE (NetBeans, PhpStorm, Eclipse, Visual Studio, Unity, PhpDesigner…)</li> -->
+				<li>Bureautique : Google apps, Microsoft Office, Open Office</li>
+				<li>Présence sur stackoverflow, github</li>
+			</ul>
+		</p>
+	</div>
+
+	<div id="activites" style="display: none;">
+		<h2>Activités</h2>
+		<p>Musique, bande-dessinée, canvas, vie sociale et vie familiale</p>
+	</div>
+
 </body>
 </html>
