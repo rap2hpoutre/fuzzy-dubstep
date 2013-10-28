@@ -4,7 +4,7 @@ define('BASEDIR', '');
 require(BASEDIR . 'classes/world/Human.class.php');
 $builder = new RPGHumanBuilder();
 
-for ($i = 0; $i < 11; $i++) {
+for ($i = 0, $count = (isset($getOnlyPlayer) && $getOnlyPlayer ? 1 : 12); $i < $count; $i++) {
 	$image = imagecreatefrompng('test3.png');
 	$border = imagecolorallocate($image,0,0,0);
 	$white = imagecolorallocate($image,255,255,255);
@@ -108,8 +108,9 @@ for ($i = 0; $i < 11; $i++) {
 	}
 }
 
-
-$js = 'var pnjs = [];';
-$js .= implode('', $tmp_js);
-file_put_contents('testraf.js', $js);
+if (!isset($getOnlyPlayer) || !$getOnlyPlayer) {
+	$js = 'var pnjs = [];';
+	$js .= implode('', $tmp_js);
+	file_put_contents('testraf.js', $js);
+}
 ?>

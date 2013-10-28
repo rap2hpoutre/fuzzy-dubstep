@@ -1,4 +1,8 @@
-<!DOCTYPE HTML>
+<?php
+$getOnlyPlayer = true;
+require('npcs.php');
+require('ptf.php');
+?><!DOCTYPE HTML>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -9,6 +13,9 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 window.addEventListener("load",function() {
+
+	function isTouchDevice() { return 'ontouchstart' in window || 'onmsgesturechange' in window; };
+
 	var Q = window.Q = Quintus({development: true}).include("Sprites, Scenes, Input, 2D, Anim, Touch, UI").setup("myGame");
 
 
@@ -20,7 +27,7 @@ window.addEventListener("load",function() {
 
 	Q.Sprite.extend("Player",{
 		init: function(p) {
-			this._super(p, {sprite: "player", sheet: "player", x: 410, y: 90, speed: 150 });
+			this._super(p, {sprite: "player", sheet: "player", speed: 150 });
 			this.add('2d, animation, platformerControls');
 			this.play('stand');
 			this.currentDivId = 'intro';
@@ -42,11 +49,7 @@ window.addEventListener("load",function() {
 			}
 			if (this.p.vx < 0) this.play('walkleft');
 			else if (this.p.vx > 0) this.play('walkright');
-			else {
-				this.play('stand');
-				// this.p.x = Math.floor(this.p.x);
-				// this.p.y = Math.floor(this.p.y);
-			}
+			else this.play('stand');
 		},
 		updateDiv: function(divId) {
 			this.currentDivId = divId;
@@ -54,9 +57,23 @@ window.addEventListener("load",function() {
 		}
 	});
 
+	Q.Sprite.extend("Bird",{
+		init: function(p) {
+			this._super(p, {sprite: "corbeau", sheet: "corbeau", speed: 150, gravity: 0 });
+			this.add('2d, animation');
+			this.play('fly');
+			this.p.vx = -50;
+		},
+		step: function(dt) {
+			if (this.p.x < -50) {
+				this.destroy();
+			}
+		}
+	});
+
 	Q.Sprite.extend("Ptf",{
 		init: function(p) {
-			this._super(p, {asset:'plateforme1.png' });
+			this._super(p, {asset:'ptf0.png' });
 		},
 		setPoints: function() {
 			this.p.points = [
@@ -69,22 +86,24 @@ window.addEventListener("load",function() {
 	});
 
 	Q.scene("Main",function(stage) {
-		// stage.insert(new Q.Repeater({ asset: "background.png", speedX: 0, speedY: 0 }));
-		stage.insert(new Q.Ptf({x: 50, y: 180, divId: 'intro'})).setPoints();
-		stage.insert(new Q.Ptf({x: 180, y: 180, divId: 'competences'})).setPoints();
-		stage.insert(new Q.Ptf({x: 320, y: 150, divId: 'parcours'})).setPoints();
-		stage.insert(new Q.Ptf({x: 470, y: 130, divId: 'formation'})).setPoints();
-		stage.insert(new Q.Ptf({x: 660, y: 180, divId: 'activites'})).setPoints();
+		stage.insert(new Q.Repeater({ asset: "fondmoche.png", speedX: 0, speedY: 0 }));
+		stage.insert(new Q.Ptf({asset:'ptf0.png', x: 50, y: 180, divId: 'intro'})).setPoints();
+		stage.insert(new Q.Ptf({asset:'ptf1.png',x: 180, y: 180, divId: 'competences'})).setPoints();
+		stage.insert(new Q.Ptf({asset:'ptf2.png',x: 320, y: 150, divId: 'parcours'})).setPoints();
+		stage.insert(new Q.Ptf({asset:'ptf3.png',x: 470, y: 130, divId: 'formation'})).setPoints();
+		stage.insert(new Q.Ptf({asset:'ptf4.png',x: 660, y: 180, divId: 'activites'})).setPoints();
+		stage.insert(new Q.Sprite({x: 690, y: 164, asset:'merci.png'}));
+		stage.insert(new Q.Bird({x: 600, y: 40}));
 		var player = stage.insert(new Q.Player({x: 20, y: 100}));
 		stage.add("viewport").follow(player,{x: true, y: false}, {minX: -20});
 	});
 
 	Q.scene("UI",function(stage) {
-		stage.insert(new Q.Sprite({asset:'arrows.png', x: 280, y: 170}));
+		if (!isTouchDevice()) stage.insert(new Q.Sprite({asset:'arrows.png', x: 280, y: 170}));
 	});
 
 	// Chargement initial
-	Q.load("player.png, background.png, plateforme1.png, arrows.png", function() {
+	Q.load("player.png, plateforme1.png, arrows.png, merci.png, corbeau.png, fondmoche.png, ptf0.png, ptf1.png, ptf2.png, ptf3.png, ptf4.png", function() {
 		Q.sheet("player","player.png",{tilew: 16, tileh: 32,  sx: 0, sy: 0});
 		Q.animations('player', {
 			hit: { frames: [1], rate: 3, next: 'stand', trigger: 'standup'},
@@ -93,6 +112,10 @@ window.addEventListener("load",function() {
 			walk: { frames: [4,5,4,0,7,6,7,0], rate: 1/6},
 			walkright: { frames: [8,9,8,11,10,12,10,11], rate: 1/6},
 			walkleft: { frames: [17,16,17,14,15,13,15,14], rate: 1/6},
+		});
+		Q.sheet("corbeau","corbeau.png",{tilew: 23, tileh: 16,  sx: 0, sy: 0});
+		Q.animations('corbeau', {
+			fly: { frames: [0,1], rate: 1/4 },
 		});
 		Q.stageScene("Main",0);
 		Q.stageScene("UI",1);
@@ -123,7 +146,7 @@ window.addEventListener("load",function() {
 		<p>
 			<ul>
 			<li>J'ai 28 ans, on peut m'appeler au 06 26 54 79 71 et m'écrire à cette adresse: raphaelht@gmail.com</li>
-			<li>Pour me voir il faut passer aller 24 boulevard Stalingrad à Nantes, sinon j'ai le permis et une carte de bus.</li>
+			<li>Pour me voir il faut aller au 24 boulevard Stalingrad à Nantes, j'ai le permis et une carte de bus.</li>
 			<li>Pour découvrir ce qui (je l'espère) pourra vous intéresser (parcours professionnel, compétences, etc.) je vous invite à vous rendre sur la plateforme suivante, avec le pouce ou les touches du clavier</li>
 			</ul>
 		</p>
