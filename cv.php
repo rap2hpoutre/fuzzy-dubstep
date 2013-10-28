@@ -19,9 +19,9 @@ window.addEventListener("load",function() {
 	var Q = window.Q = Quintus({development: true}).include("Sprites, Scenes, Input, 2D, Anim, Touch, UI").setup("myGame");
 
 
-	Q.input.joypadControls();
+	// Q.input.joypadControls();
 	Q.input.keyboardControls();
-	Q.input.touchControls({ controls:  [ [],[],[],[],[] ] });
+	Q.input.touchControls({ controls:  [ [],[],['left', '←'],['up', '↑'],['right', '→'] ] });
 
 
 
@@ -73,25 +73,25 @@ window.addEventListener("load",function() {
 
 	Q.Sprite.extend("Ptf",{
 		init: function(p) {
-			this._super(p, {asset:'ptf0.png' });
+			this._super(p, {asset:'ptf.png' });
 		},
 		setPoints: function() {
 			this.p.points = [
 				[this.p.cx*-1, 0],
 				[this.p.cx,0],
-				[this.p.cx, this.p.cy],
-				[this.p.cx*-1, this.p.cy]
+				[this.p.cx, this.p.cy+5],
+				[this.p.cx*-1, this.p.cy+5]
 			];
 		}
 	});
 
 	Q.scene("Main",function(stage) {
 		stage.insert(new Q.Repeater({ asset: "fondmoche.png", speedX: 0, speedY: 0 }));
-		stage.insert(new Q.Ptf({asset:'ptf0.png', x: 50, y: 180, divId: 'intro'})).setPoints();
-		stage.insert(new Q.Ptf({asset:'ptf1.png',x: 180, y: 180, divId: 'competences'})).setPoints();
-		stage.insert(new Q.Ptf({asset:'ptf2.png',x: 320, y: 150, divId: 'parcours'})).setPoints();
-		stage.insert(new Q.Ptf({asset:'ptf3.png',x: 470, y: 130, divId: 'formation'})).setPoints();
-		stage.insert(new Q.Ptf({asset:'ptf4.png',x: 660, y: 180, divId: 'activites'})).setPoints();
+		stage.insert(new Q.Ptf({x: 50, y: 180, divId: 'intro'})).setPoints();
+		stage.insert(new Q.Ptf({x: 180, y: 180, divId: 'competences'})).setPoints();
+		stage.insert(new Q.Ptf({x: 320, y: 150, divId: 'parcours'})).setPoints();
+		stage.insert(new Q.Ptf({x: 470, y: 130, divId: 'formation'})).setPoints();
+		stage.insert(new Q.Ptf({x: 660, y: 180, divId: 'activites'})).setPoints();
 		stage.insert(new Q.Sprite({x: 690, y: 164, asset:'merci.png'}));
 		stage.insert(new Q.Bird({x: 600, y: 40}));
 		var player = stage.insert(new Q.Player({x: 20, y: 100}));
@@ -103,7 +103,7 @@ window.addEventListener("load",function() {
 	});
 
 	// Chargement initial
-	Q.load("player.png, plateforme1.png, arrows.png, merci.png, corbeau.png, fondmoche.png, ptf0.png, ptf1.png, ptf2.png, ptf3.png, ptf4.png", function() {
+	Q.load("player.png, arrows.png, merci.png, corbeau.png, fondmoche.png, ptf.png", function() {
 		Q.sheet("player","player.png",{tilew: 16, tileh: 32,  sx: 0, sy: 0});
 		Q.animations('player', {
 			hit: { frames: [1], rate: 3, next: 'stand', trigger: 'standup'},
