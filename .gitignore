@@ -1,4 +1,5 @@
 vendor/
 conf/
 public/images/
-js/npcs.js
+public/js/npcs.js
+public/js/phrases.js
