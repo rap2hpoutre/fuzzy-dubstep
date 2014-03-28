@@ -54,6 +54,10 @@
 							stage.options.npc.pause = true;
 							if (stage.options.npc.life <= 0) {
 								stage.options.npc.play("dead");
+								stage.options.npc.stage.insert(new Q.Loot({
+									x: stage.options.npc.p.x,
+									y: stage.options.npc.p.y + 10
+								}));
 							} else {
 								stage.options.npc.play("hit");
 							}

@@ -9,6 +9,18 @@
 		}
 	});
 
+	// Un billet
+	Q.Sprite.extend("Loot",{
+		init: function(p) {
+			this._super(p, {
+				asset:'money2.png',
+				vx: 5,
+				vy: 10
+			});
+			this.add('animation');
+		}
+	});
+
 	// L'argent
 	Q.UI.Text.extend("Money",{
 		init: function(p) {
@@ -149,6 +161,7 @@
 			this.add('2d, animation, simpleRPGControls');
 			Q.state.on("change.life",this,"testIsDead");
 			this.on("hit",function(collision) {
+				// Promeneur
 				if(collision.obj.isA("NPC") && collision.obj.life > 0) {
 					if (Date.now() > this.last_action + 500 && Q.state.get("life") > 0) {
 						this.last_action = Date.now();
@@ -163,12 +176,17 @@
 							player: this
 						});
 					}
+				// Voiture
 				} else if(collision.obj.isA("Car")) {
 					if (Date.now() > this.last_action + 500) {
 						this.last_action = Date.now();
 						BIM(this.p.x, this.p.y);
 						this.takeDamage(2, this.p.x < collision.obj.p.x ? -150 : 150);
 					}
+				// Argent
+				} else if (collision.obj.isA("Loot")) {
+					collision.obj.destroy();
+					Q.state.inc("money",Math.floor(Math.random() * 3) + 1);
 				}
 			});
 			this.on("standup", this, "standup");

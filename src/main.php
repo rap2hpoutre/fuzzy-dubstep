@@ -6,7 +6,7 @@ if (!isset($_REQUEST['cache'])) {
 	require(dirname(__FILE__) . '/joel.php');
 }
 if (!file_exists(dirname(__FILE__) . '../public/images/life.png')) {
-	$images = array('background.png', 'life.png', 'money.png', 'paf.png', 'time.png');
+	$images = array('background.png', 'life.png', 'money.png', 'paf.png', 'time.png', 'money2.png');
 	foreach($images as $image) {
 		copy(dirname(__FILE__) . '/assets/img/' . $image, dirname(__FILE__) . '/../public/images/' . $image);
 	}
@@ -160,7 +160,7 @@ window.addEventListener("load",function() {
 	});
 
 	// Chargement initial
-	Q.load("houses.png, car0.png, car1.png, car2.png, money.png, player.png,time.png, background.png, life.png, paf.png, " + str_pnj_load, function() {
+	Q.load("houses.png, car0.png, car1.png, car2.png, money.png, player.png, money2.png, time.png, background.png, life.png, paf.png, " + str_pnj_load, function() {
 
 		Q.sheet("player","player.png",{tilew: 16, tileh: 32,  sx: 0, sy: 0});
 		Q.animations('player', {
