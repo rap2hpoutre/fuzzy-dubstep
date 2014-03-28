@@ -1,2 +1,4 @@
 vendor/
 conf/
+public/images/
+js/npcs.js

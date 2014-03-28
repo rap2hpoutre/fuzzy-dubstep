@@ -5,6 +5,12 @@ if (!isset($_REQUEST['cache'])) {
 	require(dirname(__FILE__) . '/cars.php');
 	require(dirname(__FILE__) . '/joel.php');
 }
+if (!file_exists(dirname(__FILE__) . '../public/images/life.png')) {
+	$images = array('background.png', 'life.png', 'money.png', 'paf.png', 'time.png');
+	foreach($images as $image) {
+		copy(dirname(__FILE__) . '/assets/img/' . $image, dirname(__FILE__) . '/../public/images/' . $image);
+	}
+}
 ?><!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -45,7 +51,7 @@ if (!isset($_REQUEST['cache'])) {
 <script src="./js/actions.js?t=<?php echo time(); ?>"></script>
 <script src="./js/objects.js?t=<?php echo time(); ?>"></script>
 <script src="./js/scenes.js?t=<?php echo time(); ?>"></script>
-<script src="./js/testraf.js?t=<?php echo time(); ?>"></script>
+<script src="./js/npcs.js?t=<?php echo time(); ?>"></script>
 <style>
   body { padding:0px; margin:0px; }
 </style>

@@ -90,7 +90,6 @@
 		stage.insert(new Q.Car({asset: 'car0.png', y: 580, x: -500, vx : -220}));
 		width_div_2 = houses.p.cx;
 		var pnjs = [];
-		console.log(pnjs_props, pnjs_props.length);
 		for (i = 0; i < pnjs_props.length; i++) {
 			pnjs.push(
 				stage.insert(

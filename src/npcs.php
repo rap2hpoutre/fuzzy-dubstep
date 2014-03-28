@@ -70,16 +70,16 @@ for ($i = 0, $count = (isset($getOnlyPlayer) && $getOnlyPlayer ? 1 : 12); $i < $
 
 		$text_color = "black";
 		$luma = 0.2126 * $cbr + 0.7152 * $cbg + 0.0722 * $cbb; // per ITU-R BT.709
-		if ($luma < 40) {
+		if ($luma < 100) {
 			$text_color = "white";
 		}
 
-		if (rand(0,1)) {
+		if ($i != ($count-1) && rand(0,1)) {
 			$vx = mt_rand(-8,8) * 10;
 		} else {
 			$vx = '0';
 		}
-		
+
 		$tmp_js[] = array(
 			'nname' => utf8_encode($human->getFullName()),
 			'bg_text_color' => $bg_text_color,
@@ -92,6 +92,6 @@ for ($i = 0, $count = (isset($getOnlyPlayer) && $getOnlyPlayer ? 1 : 12); $i < $
 
 if (!isset($getOnlyPlayer) || !$getOnlyPlayer) {
 	$js = 'var pnjs_props = ' . json_encode($tmp_js) . ';';
-	file_put_contents(dirname(__FILE__) . '/../public/js/testraf.js', $js);
+	file_put_contents(dirname(__FILE__) . '/../public/js/npcs.js', $js);
 }
 ?>
